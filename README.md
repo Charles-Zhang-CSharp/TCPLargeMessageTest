@@ -39,6 +39,10 @@ Google AI gives following advices for receiving complete TCP messages:
 * https://learn.microsoft.com/en-ca/dotnet/fundamentals/networking/sockets/tcp-classes
 * https://stackoverflow.com/questions/66857509/how-does-tcp-handle-a-file-with-large-size "On the receiving side of the TCP, there is no relation to the number of send operations and the number of receive operations. If the sender send 5 times 10 bytes consecutively and fast, very likely they will be received as 50 bytes in one receive operation."
 
+Those ones summarizes key points well:
+
+* https://stackoverflow.com/questions/6473929/does-tcp-ip-conveys-complete-messages "TCP is a stream based protocol, not a message based protocol. TCP has no idea when your messages begin or end, and so there is no guarentee that you will get a full message in a single call. There is also no guarentee that you'll get only one full message. You must buffer the data you receive, and split it into messages yourself. If you don't get a full message, store what data you have received, and wait until the rest arrives." "TCP is allowed to fragment your data into multiple datagrams, which are assembled in-order at the recipient. You are guaranteed that your data will eventually arrive, in the order it was sent. But some portion of the data you send may arrive earlier than the rest." "What you are experience may be that when you call receive, a portion of the data you sent has arrived at your computer, but some portion of it is still being sent over the network. You will have to buffer the portions of data you receive and wait until you have received a complete "message."" Straightforward.
+
 ## Related Setups
 
 * https://github.com/Charles-Zhang-CSharp/DemoWebSocketProtocolImplementation
