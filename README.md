@@ -1,7 +1,8 @@
 # TCP Large Message Test
 
-Status: In-progress
+Status: Completed
 Estimated effort: 20 hours
+Actual effort: 3.5 hours
 
 This setup tests what happens to TCP when VERY large packages are sent - because I remember from Unreal times there are talks on network limit on 512 bytes of data size, and based on my practical experience with Godot, it cannot receive large WebSocket messages reliable - is this fundamentally because of how TCP works? That's what this setup is inteded to test out.
 
@@ -17,6 +18,8 @@ Specifically, we test:
 
 ## Observations
 
+Behavior observations:
+
 * On local machine inside a single process, it seems there is no practical size limit as long as system memory can handle it.
 * Because during communication there is no way for the receiving side to know whether data is complete, it looks like it requires the receiving side to continuously examine all received bytes to know it's receiving a complete message - not a fragment, and not a multiple. (Pending some reference on how to best handle this)
 
@@ -29,6 +32,9 @@ Google AI gives following advices for receiving complete TCP messages:
 * Read in a loop until the whole message has been read: Receiving the size of the message at the beginning helps you to read the entire message from the server.
 * ReadAll and append to a buffer until you've got it all, then process the buffer: Or you can use LookAhead to see if you've got it all and if not, just leave it in the socket until the next DataAvailable. 
 
+Conclusion:
+
+* Use TcpClient/TcpListener and stream based message handling, and we can treat Tcp just like binary serialization/deserialization.
 
 ## References
 
