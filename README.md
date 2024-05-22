@@ -11,3 +11,16 @@ Specifically, we test:
 3. What exactly is this "data order" protection mechanism?
 4. How fast/efficient is sending data this way, especially when compared to UDP.
 5. Any other related concerns.
+
+## Related Setups
+
+* https://github.com/Charles-Zhang-CSharp/DemoWebSocketProtocolImplementation
+* https://github.com/Charles-Zhang-CSharp/WebsocketStaticFileServer
+
+```mermaid
+---
+title: Setup Order of Logic
+---
+flowchart TD
+   TCPLargeMessageTest --> DemoWebSocketProtocolImplementation --> WebsocketStaticFileServer
+```
